@@ -1,0 +1,16 @@
+[package]
+name = "koru"
+version = "0.1.0"
+authors = ["a-n-t-i-b-a-r-y-o-n"]
+edition = "2018"
+
+[dependencies]
+async-std = "1.9.0"
+regex = "1.5.3"
+serde_json = "1.0.64"
+quick-xml = "0.22.0"
+reqwest = { version = "0.11"}
+tokio = { version = "1", features = ["full"] }
+urlencoding = "1.1.1"
+wake-on-lan = "0.2.0"
+warp = "0.3"
