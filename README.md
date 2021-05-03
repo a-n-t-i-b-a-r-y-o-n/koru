@@ -1,19 +1,32 @@
 koru
 ====
-_Roku client library written in Rust_
+_Roku client library in Rust_
+
+This project provides objects to represent and interact with real-world Roku hardware, as well as an asynchronous Roku API client.
+Brief overview of features:
+* Discover Roku devices on the local network
+* Interact with Roku devices, e.g.
+  * Get device info & installed apps
+  * Wake them from sleep or turn them off
+  * Press buttons on the remote
+  * Send key presses
+  * Launch apps
+
+## Discovery
+`discover_devices() -> Result<Vec<Device>, Error>`  
+Attempt to discover devices with SSDP, then return the list of responders.
 
 ## Objects
 
 ### Device
 
 #### Properties
-* `ipv4:      String`
-* `port:      i32`
-* `usn:       Option<String>`
-* `name:      String`
-* `network:   NETWORKTYPE`
-* `mac_wlan:  [u8; 6]`
-* `mac_eth:   [u8; 6]`
+* `ipv4:      String` - IPv4 Address
+* `port:      i32` - Port number
+* `name:      String` - Friendly device name
+* `network:   NETWORKTYPE` - Network type, e.g. Ethernet or Wireless
+* `mac_wlan:  [u8; 6]` - MAC Address for WLAN
+* `mac_eth:   [u8; 6]` - MAC Address for Ethernet
 
 #### Methods
 * `get_info() : Result<HashMap<String, String>, String>`  
@@ -21,7 +34,7 @@ _Roku client library written in Rust_
 * `get_power_state() : POWERSTATE`  
   Get device power state
 * `send_power_command(command: POWERCOMMAND) : Result<bool, String>`  
-  Git a power command, e.g. turn on, turn off, toggle
+  Send a power command, e.g. turn on, turn off, toggle
 * `get_installed_apps() : Result<Vec<App>, String>`  
   Return a Vec of installed apps
 * `launch_app_by_id(app: &App) : Result<bool, String>`  
@@ -38,11 +51,11 @@ _Roku client library written in Rust_
 ### App
 
 #### Properties
-* `id: i32`
-* `apptype: String`
-* `version: String,`
-* `name: String,`
-* `icon: Option<Vec<u8>>`
+* `id: i32` - App ID
+* `apptype: String` - App type, e.g. tvtuner, app
+* `version: String,` - App version
+* `name: String,` - Friendly app name
+* `icon: Option<Vec<u8>>` - App Icon, potentially unfetched
 
 #### Methods
 * `fetch_icon()  :  Result<Vec<u8>, String>`  
